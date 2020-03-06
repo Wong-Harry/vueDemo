@@ -6,7 +6,7 @@
 - "prettier.semi": true, // 句尾添加分号
 - "prettier.singleQuote": true, // 使用单引号代替双引号
 - "prettier.proseWrap": "preserve", // 默认值。因为使用了一些折行敏感型的渲染器（如GitHub comment）而按照markdown文本样式进行折行
-- "prettier.arrowParens": "avoid", //  (x) => {} 箭头函数参数只有一个时是否要有小括号。avoid：省略括号
+- "prettier.arrowParens": "avoid", //  (x) => {} 箭头函数参数只有一个时是否要有小括号。 默认avoid 可选 avoid| always
 - "prettier.bracketSpacing": true, // 在对象，数组括号与文字之间加空格 "{ foo: bar }"
 - "prettier.disableLanguages": ["vue"], // 不格式化vue文件，vue文件的格式化单独设置
 - "prettier.endOfLine": "auto", // 结尾是 \n \r \n\r auto
