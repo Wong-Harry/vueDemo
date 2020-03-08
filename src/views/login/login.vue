@@ -23,6 +23,8 @@
 </template>
 
 <script>
+import { setToken } from '../../utils/auth';
+
 export default {
   data() {
     return {
@@ -36,20 +38,20 @@ export default {
           {
             required: true,
             trigger: 'blur',
-            // message: '请输入用户名'
-            validator: (rule, value, callback) => {
-              console.log('value: ', value);
-              if (!value) {
-                return callback(new Error('请输入用户名'));
-              }
-              if (!Number(value)) {
-                callback(new Error('请输入用户名'));
-              } else if (value < 0 || value > 1) {
-                callback(new Error('请输入用户名'));
-              } else {
-                callback();
-              }
-            }
+            message: '请输入用户名'
+            // validator: (rule, value, callback) => {
+            //   console.log('value: ', value);
+            //   if (!value) {
+            //     return callback(new Error('请输入用户名'));
+            //   }
+            //   if (!Number(value)) {
+            //     callback(new Error('请输入用户名'));
+            //   } else if (value < 0 || value > 1) {
+            //     callback(new Error('请输入用户名'));
+            //   } else {
+            //     callback();
+            //   }
+            // }
           }
         ],
         passWord: [{ required: true, trigger: 'blur', message: '请输入密码' }]
@@ -58,10 +60,17 @@ export default {
   },
   methods: {
     login() {
-      console.log(this.loginForm);
+      console.log(this.$refs.loginForm);
       // this.loading = true;
-      this.$ref.loginForm.validate((result) => {
+      this.$refs.loginForm.validate((result) => {
         console.log(result);
+        if (result) {
+          this.loading = true;
+          setToken();
+          this.$router.push({ path: '/' });
+        } else {
+          return false;
+        }
       });
     },
     resetForm(formName) {

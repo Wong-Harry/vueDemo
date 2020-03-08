@@ -1,4 +1,4 @@
-# vue-project
+# vuesswqproject
 
 ## Project setup
 ```
