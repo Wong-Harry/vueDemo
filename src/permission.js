@@ -1,26 +1,30 @@
-import NProgress from 'nprogress'; // Progress 进度条
-import 'nprogress/nprogress.css'; // Progress 进度条样式
-import router from './router';
-import { getToken } from './utils/auth';
+import NProgress from 'nprogress' // Progress 进度条
+import 'nprogress/nprogress.css' // Progress 进度条样式
+import router from './router'
+import { getToken } from './utils/auth'
 
-const whiteList = ['/login', '/404']; // 白名单，不需要权限就可以看到的路由
+const whiteList = ['/login', '/404'] // 白名单，不需要权限就可以看到的路由
 router.beforeEach((to, from, next) => {
-  console.log('from: ', from);
-  console.log('to: ', to);
-  NProgress.start();
+  console.log('from: ', from)
+  console.log('to: ', to)
+  NProgress.start()
 
   if (getToken()) {
-    next();
+    if (to.path === '/login') {
+      next({ path: '/' })
+    } else {
+      next()
+    }
   } else if (whiteList.indexOf(to.path) !== -1) {
-    next();
+    next()
   } else {
-    next('/login');
+    next('/login')
   }
   // NProgress.done();
-});
+})
 
 router.afterEach(() => {
-  console.log('afterEach');
+  console.log('afterEach')
 
-  NProgress.done();
-});
+  NProgress.done()
+})

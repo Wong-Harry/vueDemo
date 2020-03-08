@@ -1,17 +1,26 @@
-import Vue from 'vue';
-import VueRouter from 'vue-router';
-import Home from '../views/Home.vue';
-import User from '../views/User.vue';
-import login from '../views/login/login.vue';
+import Vue from 'vue'
+import VueRouter from 'vue-router'
+import Layout from '@/layout'
+import User from '@/views/User.vue'
+import dashboard from '@/views/dashboard/index.vue'
+import login from '@/views/login/login.vue'
 
-Vue.use(VueRouter);
+Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
     name: 'Home',
     label: '首页',
-    component: Home
+    hidden: true,
+    redirect: '/dashboard',
+    component: Layout,
+    children: [
+      {
+        path: 'dashboard',
+        component: dashboard
+      }
+    ]
   },
   {
     path: '/login',
@@ -34,15 +43,15 @@ const routes = [
   //   // which is lazy-loaded when the route is visited.
   //   component: () => import('../views/About.vue')
   // }
-];
+]
 
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes
-});
+})
 
-export default router;
+export default router
 
 export const asyncRouterMap = [
   {
@@ -63,6 +72,18 @@ export const asyncRouterMap = [
     meta: {
       title: '关于模块',
       icon: 'user'
-    }
+    },
+    child: [
+      {
+        path: '/about',
+        name: 'About',
+        label: '关于',
+        component: import('../views/About.vue'),
+        meta: {
+          title: '关于模块',
+          icon: 'user'
+        }
+      }
+    ]
   }
-];
+]

@@ -1,19 +1,19 @@
 <template>
   <div class="loginBox">
     <el-form
+      ref="loginForm"
       status-icon
       :rules="loginFormFules"
       :model="loginForm"
       class="formBox"
       inline-message
-      ref="loginForm"
     >
       <h3 class="title">后台管理系统</h3>
       <el-form-item prop="userName" icon="el-icon-search">
-        <el-input type="text" placeholder="请输入用户名" v-model="loginForm.userName"></el-input>
+        <el-input v-model="loginForm.userName" type="text" placeholder="请输入用户名" />
       </el-form-item>
       <el-form-item prop="passWord">
-        <el-input type="password" placeholder="请输入密码" v-model="loginForm.passWord"></el-input>
+        <el-input v-model="loginForm.passWord" type="password" placeholder="请输入密码" />
       </el-form-item>
       <el-form-item>
         <el-button type="primary" :loading="loading" @click="login()">提交</el-button>
@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import { setToken } from '../../utils/auth';
+import { setToken } from '../../utils/auth'
 
 export default {
   data() {
@@ -56,29 +56,31 @@ export default {
         ],
         passWord: [{ required: true, trigger: 'blur', message: '请输入密码' }]
       }
-    };
+    }
   },
   methods: {
     login() {
-      console.log(this.$refs.loginForm);
+      console.log(this.$refs.loginForm)
       // this.loading = true;
-      this.$refs.loginForm.validate((result) => {
-        console.log(result);
+      this.$refs.loginForm.validate(result => {
+        console.log(result)
         if (result) {
-          this.loading = true;
-          setToken();
-          this.$router.push({ path: '/' });
+          this.loading = true
+          setToken(this.loginForm.userName).then(res => {
+            console.log(res)
+          })
+          this.$router.push({ path: '/' })
         } else {
-          return false;
+          return false
         }
-      });
+      })
     },
     resetForm(formName) {
-      this.$refs[formName].resetFields();
-      console.log(' this.$refs: ', this.$refs);
+      this.$refs[formName].resetFields()
+      console.log(' this.$refs: ', this.$refs)
     }
   }
-};
+}
 </script>
 
 <style scoped lang="scss">
