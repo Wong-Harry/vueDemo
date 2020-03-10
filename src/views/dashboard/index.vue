@@ -3,6 +3,7 @@
     <p>这是首页{{ count }}</p>
     <p>这是首页{{ count123 }}</p>
     <el-button type="primary" @click="add()">增加</el-button>
+    <el-button type="primary" @click="modify()">修改</el-button>
     <div v-for="item in todos" :key="item.id">{{ item }}</div>
   </div>
 </template>
@@ -38,16 +39,16 @@ export default {
   //   }
   // }),
   methods: {
+    modify() {},
     add() {
       // this.$set(this.$store.state, 'newValue', 12);
       // this.$store.dispatch('increment');
       // this.$store.dispatch('incrementAsync', {
       //   amount: 10
       // });
-
-      this.$store.dispatch('actionPromise').then(() => {
-        console.log(123123)
-      })
+      // this.$store.dispatch('actionPromise').then(() => {
+      //   console.log(123123)
+      // })
       // this.$store.commit('increment', {
       //   amount: 10
       // });

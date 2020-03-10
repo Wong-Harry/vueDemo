@@ -7,9 +7,14 @@ const user = {
   },
   mutations: {},
   actions: {
-    getUserRouter({ commit, state }, userPermission) {
-      return new Promise(resolve => {
-        console.log(asyncRouterMap)
+    generateRoutes({ commit, state }, userPermission) {
+      return new Promise((resolve, reject) => {
+        const role = userPermission.roleName
+        const menus = userPermission.menuList
+        // let accessedRouters
+        if (role && menus) {
+          console.log(asyncRouterMap)
+        }
       })
     }
   }

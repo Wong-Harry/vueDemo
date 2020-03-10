@@ -9,17 +9,19 @@ const whiteList = ['/login', '/404'] // 白名单，不需要权限就可以看�
 router.beforeEach((to, from, next) => {
   console.log(`from:${from.path} ,to ${to.path}`)
   NProgress.start()
+  console.log(store.getters.role)
 
   if (getToken()) {
     if (to.path === '/login') {
       next({ path: '/' })
     } else if (!store.getters.role) {
       next()
-      console.log(to)
+      store.dispatch('getInfo')
+      // console.log(to)
 
-      console.log({
-        ...to
-      })
+      // console.log({
+      //   ...to
+      // })
       NProgress.done()
     } else {
       next()
