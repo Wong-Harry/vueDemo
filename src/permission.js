@@ -5,8 +5,7 @@ import { getToken } from './utils/auth'
 
 const whiteList = ['/login', '/404'] // 白名单，不需要权限就可以看到的路由
 router.beforeEach((to, from, next) => {
-  console.log('from: ', from)
-  console.log('to: ', to)
+  console.log(`from:${from.path} ,to ${to.path}`)
   NProgress.start()
 
   if (getToken()) {
