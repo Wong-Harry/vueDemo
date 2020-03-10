@@ -56,7 +56,6 @@ export default {
       //   amount: 10
       // });
     }
-  },
-  components: {}
+  }
 }
 </script>

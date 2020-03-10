@@ -1,5 +1,7 @@
 <template>
-  <div class="user"></div>
+  <div class="user">
+    <p>这是user</p>
+  </div>
 </template>
 
 <script>

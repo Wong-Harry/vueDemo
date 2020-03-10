@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import { setToken } from '../../utils/auth'
+import { setToken } from '@/utils/auth'
 
 export default {
   data() {
@@ -60,16 +60,31 @@ export default {
   },
   methods: {
     login() {
-      console.log(this.$refs.loginForm)
-      // this.loading = true;
       this.$refs.loginForm.validate(result => {
         console.log(result)
         if (result) {
           this.loading = true
-          setToken(this.loginForm.userName).then(res => {
-            console.log(res)
-          })
-          this.$router.push({ path: '/' })
+          this.$store
+            .dispatch('login', {
+              loginForm: this.loginForm
+            })
+            .then(data => {
+              console.log('data: ', data)
+              this.loading = false
+              if (data.result === 'success') {
+                setToken(this.loginForm.userName)
+                this.$router.push({ path: '/' })
+              } else {
+                this.$message.error('账号/密码错误')
+              }
+            })
+            .catch(e => {
+              this.loading = false
+            })
+          // this.loading = true
+          // setToken(this.loginForm.userName).then(res => {
+          //   console.log(res)
+          // })
         } else {
           return false
         }

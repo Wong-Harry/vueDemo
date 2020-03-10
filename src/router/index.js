@@ -5,7 +5,7 @@ Vue.use(VueRouter)
 /* layout */
 import Layout from '@/layout'
 
-const routes = [
+export const constantRouterMap = [
   {
     path: '/404',
     component: () => import('@/views/error-page/404.vue'),
@@ -69,14 +69,14 @@ const routes = [
   { path: '*', redirect: '/404', hidden: true }
 ]
 
-const router = new VueRouter({
+export default new VueRouter({
   // mode: 'history',
-  base: process.env.BASE_URL,
+  // base: process.env.BASE_URL,
   scrollBehavior: () => ({ y: 0 }),
-  routes
+  routes: constantRouterMap
 })
 
-export default router
+// export default router
 
 export const asyncRouterMap = [
   {

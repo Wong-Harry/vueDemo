@@ -1,17 +1,14 @@
+import Cookies from 'js-cookie'
+const LoginKey = 'hasLogin'
+
 export function getToken() {
-  return window.localStorage.getItem('token')
+  return Cookies.get(LoginKey)
 }
 
-export function setToken(loginType) {
-  return new Promise((resolve, reject) => {
-    if (loginType === 'admin') {
-      window.localStorage.setItem('token', 1)
-    } else if (loginType === 'user') {
-      console.log(123)
-    }
-  })
+export function setToken(userName) {
+  return Cookies.set(LoginKey, userName)
 }
 
 export function removeToken() {
-  return window.localStorage.removeItem('token')
+  return Cookies.remove(LoginKey)
 }
