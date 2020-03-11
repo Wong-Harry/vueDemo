@@ -13,23 +13,20 @@ export const constantRouterMap = [
   },
   {
     path: '/login',
-    name: 'login',
     hidden: true,
-    label: '登录',
     component: () => import('@/views/login/login.vue')
   },
   {
     path: '/',
     name: 'home',
     label: '首页',
-    hidden: true,
     redirect: '/dashboard',
     component: Layout,
     children: [
       {
         path: 'dashboard',
         component: () => import('@/views/dashboard/index.vue'),
-        name: 'Dashboard',
+        // name: 'Dashboard',
         meta: { title: 'Dashboard', icon: 'dashboard', affix: true }
       }
     ]
@@ -98,8 +95,7 @@ export default new VueRouter({
 export const asyncRouterMap = [
   {
     path: '/user',
-    name: 'user',
-    hidden: true,
+    name: 'User',
     label: '用户',
     redirect: '/user/index',
     component: Layout,
@@ -107,14 +103,14 @@ export const asyncRouterMap = [
       {
         path: 'index',
         component: () => import('@/views/user/index.vue'),
-        name: 'user',
+        // name: 'User',
         meta: { title: '用户列表', icon: 'dashboard', affix: true },
         menu: 'user'
       },
       {
         path: 'role',
         component: () => import('@/views/user/userRole.vue'),
-        name: 'userRole',
+        name: 'UserRole',
         meta: { title: '用户权限管理', icon: 'dashboard', affix: true },
         menu: 'role'
       }
@@ -122,8 +118,7 @@ export const asyncRouterMap = [
   },
   {
     path: '/article',
-    name: 'article',
-    hidden: true,
+    name: 'Article',
     label: '文章',
     redirect: '/article/index',
     component: Layout,
@@ -131,7 +126,7 @@ export const asyncRouterMap = [
       {
         path: 'index',
         component: () => import('@/views/articleList/index.vue'),
-        name: 'article',
+        // name: 'Article',
         meta: { title: 'Article', icon: 'dashboard', affix: true },
         menu: 'article'
       }
@@ -140,15 +135,14 @@ export const asyncRouterMap = [
   {
     path: '/about',
     label: '关于',
-    hidden: true,
-    name: 'about',
+    name: 'About',
     redirect: '/about/index',
     component: Layout,
     children: [
       {
         path: 'index',
         component: () => import('@/views/About.vue'),
-        name: 'about',
+        // name: 'About',
         meta: { title: 'about', icon: 'dashboard', affix: true },
         menu: 'about'
       }

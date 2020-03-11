@@ -27,9 +27,7 @@ export default {
       return state.count1 + state.count - 1
     }
   },
-  created: () => {
-    console.log(123123)
-  },
+  created: () => {},
 
   // computed: mapState({
   //   count: 'count1',
@@ -41,6 +39,8 @@ export default {
   methods: {
     modify() {},
     add() {
+      console.log(this.$router)
+
       // this.$set(this.$store.state, 'newValue', 12);
       // this.$store.dispatch('increment');
       // this.$store.dispatch('incrementAsync', {

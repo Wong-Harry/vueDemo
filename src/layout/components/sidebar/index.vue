@@ -11,7 +11,8 @@
         :collapse-transition="false"
         mode="vertical"
       >
-        <router-link to="/">
+        <sidebar-item v-for="item in permission_routers" :key="item.id" :routes="item" />
+        <!-- <router-link to="/">
           <el-menu-item index="1">
             <i class="el-icon-location" />
             <span>首页</span>
@@ -37,7 +38,7 @@
             <i class="el-icon-setting" />
             <span slot="title">关于</span>
           </el-menu-item>
-        </router-link>
+        </router-link>-->
       </el-menu>
     </el-scrollbar>
   </div>
@@ -45,16 +46,23 @@
 
 <script>
 import variables from '@/styles/variables.scss'
+import SidebarItem from './SidebarItem'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'Sidebar',
+  components: { SidebarItem },
   data: function() {
     return {}
   },
   computed: {
+    ...mapGetters(['permission_routers']),
     variables() {
       return variables
     }
+  },
+  created() {
+    console.log(1234, this.permission_routers)
   },
   methods: {
     handleOpen(key, keyPath) {

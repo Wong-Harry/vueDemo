@@ -50,6 +50,7 @@ const user = {
             console.log(addRouter)
             console.log(store.getters.permission_routers)
             router.addRoutes(store.getters.addRouters)
+            console.log(router)
           })
           .catch(() => {})
       })
