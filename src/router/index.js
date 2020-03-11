@@ -13,14 +13,14 @@ export const constantRouterMap = [
   },
   {
     path: '/login',
-    name: 'Login',
+    name: 'login',
     hidden: true,
     label: '登录',
     component: () => import('@/views/login/login.vue')
   },
   {
     path: '/',
-    name: 'Home',
+    name: 'home',
     label: '首页',
     hidden: true,
     redirect: '/dashboard',
@@ -31,40 +31,57 @@ export const constantRouterMap = [
         component: () => import('@/views/dashboard/index.vue'),
         name: 'Dashboard',
         meta: { title: 'Dashboard', icon: 'dashboard', affix: true }
-      },
-      {
-        path: 'article-list',
-        component: () => import('@/views/articleList/index.vue'),
-        name: 'Dashboard',
-        meta: { title: 'ArticleList', icon: 'dashboard', affix: true }
-      }
-    ]
-  },
-  {
-    path: '/user',
-    name: 'User',
-    hidden: true,
-    label: '用户',
-    redirect: '/user/index',
-    component: Layout,
-    children: [
-      {
-        path: 'index',
-        component: () => import('@/views/User.vue'),
-        name: 'user',
-        meta: { title: 'User', icon: 'dashboard', affix: true }
       }
     ]
   },
   // {
+  //   path: '/user',
+  //   name: 'user',
+  //   hidden: true,
+  //   label: '用户',
+  //   redirect: '/user/index',
+  //   component: Layout,
+  //   children: [
+  //     {
+  //       path: 'index',
+  //       component: () => import('@/views/user/index.vue'),
+  //       name: 'user',
+  //       meta: { title: 'User', icon: 'dashboard', affix: true }
+  //     }
+  //   ]
+  // },
+  // {
+  //   path: '/article',
+  //   name: 'article',
+  //   hidden: true,
+  //   label: '文章',
+  //   redirect: '/article/index',
+  //   component: Layout,
+  //   children: [
+  //     {
+  //       path: 'index',
+  //       component: () => import('@/views/articleList/index.vue'),
+  //       name: 'article',
+  //       meta: { title: 'Article', icon: 'dashboard', affix: true }
+  //     }
+  //   ]
+  // },
+  // {
   //   path: '/about',
   //   label: '关于',
-  //   name: 'About',
-  //   // route level code-splitting
-  //   // this generates a separate chunk (about.[hash].js) for this route
-  //   // which is lazy-loaded when the route is visited.
-  //   component: () => import('../views/About.vue')
-  // }
+  //   hidden: true,
+  //   name: 'about',
+  //   redirect: '/about/index',
+  //   component: Layout,
+  //   children: [
+  //     {
+  //       path: 'index',
+  //       component: () => import('@/views/About.vue'),
+  //       name: 'about',
+  //       meta: { title: 'about', icon: 'dashboard', affix: true }
+  //     }
+  //   ]
+  // },
 
   { path: '*', redirect: '/404', hidden: true }
 ]
@@ -82,32 +99,58 @@ export const asyncRouterMap = [
   {
     path: '/user',
     name: 'user',
+    hidden: true,
     label: '用户',
-    component: () => import('@/views/User.vue'),
-    meta: {
-      title: '用户模块',
-      icon: 'user'
-    }
+    redirect: '/user/index',
+    component: Layout,
+    children: [
+      {
+        path: 'index',
+        component: () => import('@/views/user/index.vue'),
+        name: 'user',
+        meta: { title: '用户列表', icon: 'dashboard', affix: true },
+        menu: 'user'
+      },
+      {
+        path: 'role',
+        component: () => import('@/views/user/userRole.vue'),
+        name: 'userRole',
+        meta: { title: '用户权限管理', icon: 'dashboard', affix: true },
+        menu: 'role'
+      }
+    ]
+  },
+  {
+    path: '/article',
+    name: 'article',
+    hidden: true,
+    label: '文章',
+    redirect: '/article/index',
+    component: Layout,
+    children: [
+      {
+        path: 'index',
+        component: () => import('@/views/articleList/index.vue'),
+        name: 'article',
+        meta: { title: 'Article', icon: 'dashboard', affix: true },
+        menu: 'article'
+      }
+    ]
   },
   {
     path: '/about',
-    name: 'About',
     label: '关于',
-    component: () => import('../views/About.vue'),
-    meta: {
-      title: '关于模块',
-      icon: 'user'
-    },
-    child: [
+    hidden: true,
+    name: 'about',
+    redirect: '/about/index',
+    component: Layout,
+    children: [
       {
-        path: '/about',
-        name: 'About',
-        label: '关于',
-        component: () => import('../views/About.vue'),
-        meta: {
-          title: '关于模块',
-          icon: 'user'
-        }
+        path: 'index',
+        component: () => import('@/views/About.vue'),
+        name: 'about',
+        meta: { title: 'about', icon: 'dashboard', affix: true },
+        menu: 'about'
       }
     ]
   }

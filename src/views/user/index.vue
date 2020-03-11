@@ -1,6 +1,6 @@
 <template>
   <div class="user">
-    <p>这是user</p>
+    <h1>This is an user page</h1>
   </div>
 </template>
 

@@ -11,39 +11,33 @@
         :collapse-transition="false"
         mode="vertical"
       >
-        <el-submenu index="1">
-          <template slot="title">
+        <router-link to="/">
+          <el-menu-item index="1">
             <i class="el-icon-location" />
-            <span>导航一</span>
-          </template>
-
-          <!-- <el-menu-item-group> -->
-          <!-- <template slot="title">分组一</template> -->
-          <router-link to="/">
-            <el-menu-item index="1-2">首页</el-menu-item>
-          </router-link>
-          <router-link to="/article-list">
-            <el-menu-item index="1-1">文章</el-menu-item>
-          </router-link>
-          <!-- </el-menu-item-group> -->
-        </el-submenu>
+            <span>首页</span>
+          </el-menu-item>
+        </router-link>
 
         <router-link to="/user">
           <el-menu-item index="2">
             <i class="el-icon-menu" />
-            <span slot="title">导航二</span>
+            <span slot="title">用户</span>
           </el-menu-item>
         </router-link>
 
-        <el-menu-item index="3" disabled>
-          <i class="el-icon-document" />
-          <span slot="title">导航三</span>
-        </el-menu-item>
+        <router-link to="/article">
+          <el-menu-item index="3">
+            <i class="el-icon-document" />
+            <span slot="title">文章</span>
+          </el-menu-item>
+        </router-link>
 
-        <el-menu-item index="4">
-          <i class="el-icon-setting" />
-          <span slot="title">导航四</span>
-        </el-menu-item>
+        <router-link to="/about">
+          <el-menu-item index="4">
+            <i class="el-icon-setting" />
+            <span slot="title">关于</span>
+          </el-menu-item>
+        </router-link>
       </el-menu>
     </el-scrollbar>
   </div>

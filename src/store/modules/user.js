@@ -2,7 +2,10 @@ import { getToken } from '@/utils/auth.js'
 import store from '..'
 
 const user = {
-  state: {},
+  state: {
+    token: getToken(),
+    name: ''
+  },
   mutations: {},
   actions: {
     login({ commit, state }, data) {
@@ -23,14 +26,22 @@ const user = {
         console.log(getToken())
         // 根据登陆类型判断权限范围
         const mockData = {
-          roleName: [],
-          menuList: []
+          menuList: [],
+          nickName: '',
+          roleName: '',
+          permissionList: []
         }
-        // if (getToken() === 'admin') {
-        //   mockData.roleName = ['dashboard:add', 'dashboard:modify']
-        // } else {
-        // }
-
+        if (getToken() === 'admin') {
+          mockData.nickName = '超级管理员'
+          mockData.roleName = '管理员'
+          mockData.permissionList = ['dashboard:add', 'dashboard:modify']
+          mockData.menuList = ['user', 'role', 'article', 'about']
+        } else {
+          mockData.nickName = '用户123'
+          mockData.roleName = '用户'
+          mockData.permissionList = ['dashboard:add']
+          mockData.menuList = ['user', 'article', 'about']
+        }
         // 动态添加路由
         store
           .dispatch('generateRoutes', mockData)

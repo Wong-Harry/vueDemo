@@ -1,5 +1,7 @@
 <template>
-  <div>这是文章</div>
+  <div>
+    <h1>This is an article page</h1>
+  </div>
 </template>
 
 <script>
