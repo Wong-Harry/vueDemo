@@ -35,7 +35,6 @@ function filterAsyncRouter(asyncRouterMap, menus) {
     }
     return false
   })
-  console.log(1, accessedRouters)
   return accessedRouters
 }
 
@@ -58,7 +57,6 @@ const user = {
         // 开始过滤路由权限
         let accessedRouters
         if (role === '管理员') {
-          console.log(asyncRouterMap)
           accessedRouters = asyncRouterMap || []
         } else {
           accessedRouters = filterAsyncRouter(asyncRouterMap, menus)

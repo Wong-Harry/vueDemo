@@ -1,9 +1,8 @@
 const getters = {
-  role: state => {
-    console.log(state)
+  role: state => state.user.role,
 
-    return state.user.role
-  }
+  permission_routers: state => state.permission.routers,
+  addRouters: state => state.permission.addRouters
 }
 
 export default getters

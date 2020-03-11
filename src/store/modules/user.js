@@ -1,5 +1,6 @@
 import { getToken } from '@/utils/auth.js'
 import store from '..'
+import router from '../../router'
 
 const user = {
   state: {
@@ -45,7 +46,11 @@ const user = {
         // 动态添加路由
         store
           .dispatch('generateRoutes', mockData)
-          .then(() => {})
+          .then(addRouter => {
+            console.log(addRouter)
+            console.log(store.getters.permission_routers)
+            router.addRoutes(store.getters.addRouters)
+          })
           .catch(() => {})
       })
     }
