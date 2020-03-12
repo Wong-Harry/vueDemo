@@ -27,70 +27,16 @@ export const constantRouterMap = [
         path: 'dashboard',
         component: () => import('@/views/dashboard/index.vue'),
         // name: 'Dashboard',
-        meta: { title: 'Dashboard', icon: 'dashboard', affix: true }
+        meta: { title: '首页', icon: 'dashboard', affix: true }
       }
     ]
-  },
-  // {
-  //   path: '/user',
-  //   name: 'user',
-  //   hidden: true,
-  //   label: '用户',
-  //   redirect: '/user/index',
-  //   component: Layout,
-  //   children: [
-  //     {
-  //       path: 'index',
-  //       component: () => import('@/views/user/index.vue'),
-  //       name: 'user',
-  //       meta: { title: 'User', icon: 'dashboard', affix: true }
-  //     }
-  //   ]
-  // },
-  // {
-  //   path: '/article',
-  //   name: 'article',
-  //   hidden: true,
-  //   label: '文章',
-  //   redirect: '/article/index',
-  //   component: Layout,
-  //   children: [
-  //     {
-  //       path: 'index',
-  //       component: () => import('@/views/articleList/index.vue'),
-  //       name: 'article',
-  //       meta: { title: 'Article', icon: 'dashboard', affix: true }
-  //     }
-  //   ]
-  // },
-  // {
-  //   path: '/about',
-  //   label: '关于',
-  //   hidden: true,
-  //   name: 'about',
-  //   redirect: '/about/index',
-  //   component: Layout,
-  //   children: [
-  //     {
-  //       path: 'index',
-  //       component: () => import('@/views/About.vue'),
-  //       name: 'about',
-  //       meta: { title: 'about', icon: 'dashboard', affix: true }
-  //     }
-  //   ]
-  // },
-
-  { path: '*', redirect: '/404', hidden: true }
+  }
 ]
 
 export default new VueRouter({
-  // mode: 'history',
-  // base: process.env.BASE_URL,
   scrollBehavior: () => ({ y: 0 }),
   routes: constantRouterMap
 })
-
-// export default router
 
 export const asyncRouterMap = [
   {
@@ -99,6 +45,10 @@ export const asyncRouterMap = [
     label: '用户',
     redirect: '/user/index',
     component: Layout,
+    meta: {
+      title: '用户',
+      icon: 'user'
+    },
     children: [
       {
         path: 'index',
@@ -127,7 +77,7 @@ export const asyncRouterMap = [
         path: 'index',
         component: () => import('@/views/articleList/index.vue'),
         // name: 'Article',
-        meta: { title: 'Article', icon: 'dashboard', affix: true },
+        meta: { title: '文章', icon: 'dashboard', affix: true },
         menu: 'article'
       }
     ]
@@ -143,7 +93,7 @@ export const asyncRouterMap = [
         path: 'index',
         component: () => import('@/views/About.vue'),
         // name: 'About',
-        meta: { title: 'about', icon: 'dashboard', affix: true },
+        meta: { title: '关于', icon: 'dashboard', affix: true },
         menu: 'about'
       }
     ]

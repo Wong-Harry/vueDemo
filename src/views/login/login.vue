@@ -23,7 +23,6 @@
 </template>
 
 <script>
-import { setToken } from '@/utils/auth'
 
 export default {
   data() {
@@ -72,7 +71,6 @@ export default {
               console.log('data: ', data)
               this.loading = false
               if (data.result === 'success') {
-                setToken(this.loginForm.userName)
                 this.$router.push({ path: '/' })
               } else {
                 this.$message.error('账号/密码错误')

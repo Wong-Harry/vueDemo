@@ -1,13 +1,29 @@
-import { getToken } from '@/utils/auth.js'
+import { getToken, setToken } from '@/utils/auth.js'
 import store from '..'
 import router from '../../router'
 
 const user = {
   state: {
     token: getToken(),
-    name: ''
+    name: '',
+    role: '',
+    menus: [],
+    permissions: []
   },
-  mutations: {},
+  mutations: {
+    SET_USER(state, userInfo) {
+      state.name = userInfo.nickName
+      state.role = userInfo.roleName
+      state.menus = userInfo.menuList
+      state.permissions = userInfo.permissionList
+    },
+    RESET_USER: state => {
+      state.name = ''
+      state.role = ''
+      state.menus = []
+      state.permissions = []
+    }
+  },
   actions: {
     login({ commit, state }, data) {
       return new Promise((resolve, reject) => {
@@ -17,6 +33,7 @@ const user = {
         }
         if (data.loginForm.userName === 'admin' || data.loginForm.userName === 'user') {
           resData.result = 'success'
+          setToken(data.loginForm.userName)
         }
         resolve(resData)
       })
@@ -24,7 +41,6 @@ const user = {
     getInfo({ commit, state }) {
       return new Promise((resolve, reject) => {
         // 调用api获取用户信息，现在是mock数据出来
-        console.log(getToken())
         // 根据登陆类型判断权限范围
         const mockData = {
           menuList: [],
@@ -43,16 +59,19 @@ const user = {
           mockData.permissionList = ['dashboard:add']
           mockData.menuList = ['user', 'article', 'about']
         }
+        // 设置用户权限和信息
+        commit('SET_USER', mockData)
+        // cookie保存登录状态,仅靠vuex保存的话,页面刷新就会丢失登录状态
+        setToken(mockData.roleName === '管理员' ? 'admin' : 'user')
         // 动态添加路由
         store
           .dispatch('generateRoutes', mockData)
           .then(addRouter => {
-            console.log(addRouter)
-            console.log(store.getters.permission_routers)
             router.addRoutes(store.getters.addRouters)
-            console.log(router)
           })
           .catch(() => {})
+        //  返回信息去路由守卫
+        resolve()
       })
     }
   }

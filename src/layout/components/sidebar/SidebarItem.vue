@@ -1,41 +1,75 @@
 <template>
   <div v-if="!routes.hidden">
-    <!-- v-for="item in routes" -->
-    <template>
-      <router-link
-        v-if="routes.children.length === 1 && !routes.children[0].children"
-        :key="routes.children[0].name"
-        :to="`${routes.path}/${routes.children[0].path}`"
-      >
-        <el-menu-item>{{ routes }}</el-menu-item>
+    <template
+      v-if="hasOneShowingChild(routes.children,routes) && (!onlyOneChild.children||onlyOneChild.noShowingChildren)"
+    >
+      <router-link :to="resolvePath(onlyOneChild.path)">
+        <el-menu-item :index="resolvePath(onlyOneChild.path)">{{ onlyOneChild.meta.title }}</el-menu-item>
       </router-link>
-
-      <el-submenu v-else>
-        <template slot="title">
-          <i class="el-icon-location" />
-          <span slot="title">导航一</span>
-        </template>
-        <el-menu-item-group>
-          <span slot="title">分组一</span>
-          <el-menu-item index="1-1">选项1</el-menu-item>
-          <el-menu-item index="1-2">选项2</el-menu-item>
-        </el-menu-item-group>
-      </el-submenu>
     </template>
+
+    <el-submenu v-else popper-append-to-body :index="resolvePath(onlyOneChild.path)">
+      <template slot="title">
+        <i class="el-icon-location" />
+        <span slot="title">{{ routes.meta.title }}</span>
+      </template>
+      <sidebar-item
+        v-for="child in routes.children"
+        :key="child.path"
+        class="nest-menu"
+        :base-path="resolvePath(child.path)"
+        :routes="child"
+      />
+    </el-submenu>
   </div>
 </template>
 
 <script>
+import path from 'path'
+
 export default {
   name: 'SidebarItem',
   props: {
     routes: {
       type: Object,
       required: true
+    },
+    basePath: {
+      type: String,
+      required: true
     }
   },
-  created() {
-    console.log(this.routes)
+  data() {
+    // To fix https://github.com/PanJiaChen/vue-admin-template/issues/237
+    // TODO: refactor with render function
+    this.onlyOneChild = null
+    return {}
+  },
+  methods: {
+    hasOneShowingChild(children = [], parent) {
+      const showingChildren = children.filter(item => {
+        if (item.hidden) {
+          return false
+        } else {
+          this.onlyOneChild = item
+          return true
+        }
+      })
+
+      if (showingChildren.length === 1) {
+        return true
+      }
+
+      if (showingChildren.length === 0) {
+        this.onlyOneChild = { ...parent, path: '', noShowingChildren: true }
+        return true
+      }
+
+      return false
+    },
+    resolvePath(routePath) {
+      return path.resolve(this.basePath, routePath)
+    }
   }
 }
 </script>
