@@ -7,11 +7,6 @@ import { getToken } from './utils/auth'
 const whiteList = ['/login', '/404'] // 白名单，不需要权限就可以看到的路由
 
 router.beforeEach((to, from, next) => {
-  console.log(`from:${from.path} ,to ${to.path}`)
-  console.log(to)
-  console.log('store.getters.role: ', store.getters.role)
-  console.log(12, !store.getters.role)
-
   NProgress.start()
 
   if (getToken()) {

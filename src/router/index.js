@@ -27,7 +27,7 @@ export const constantRouterMap = [
         path: 'dashboard',
         component: () => import('@/views/dashboard/index.vue'),
         // name: 'Dashboard',
-        meta: { title: '首页', icon: 'dashboard', affix: true }
+        meta: { title: '首页', icon: 'dashboard' }
       }
     ]
   }
@@ -54,15 +54,30 @@ export const asyncRouterMap = [
         path: 'index',
         component: () => import('@/views/user/index.vue'),
         // name: 'User',
-        meta: { title: '用户列表', icon: 'dashboard', affix: true },
+        meta: { title: '用户列表', icon: 'dashboard' },
         menu: 'user'
       },
       {
         path: 'role',
         component: () => import('@/views/user/userRole.vue'),
         name: 'UserRole',
-        meta: { title: '用户权限管理', icon: 'dashboard', affix: true },
-        menu: 'role'
+        meta: { title: '用户权限管理', icon: 'dashboard' },
+        menu: 'role',
+        children: [
+          {
+            path: 'roleuser',
+            component: () => import('@/views/user/index.vue'),
+            // name: 'User',
+            meta: { title: '用户权限管理1', icon: 'dashboard' },
+            menu: 'user'
+          }, {
+            path: 'roleuser1',
+            component: () => import('@/views/user/index.vue'),
+            // name: 'User',
+            meta: { title: '用户权限管理2', icon: 'dashboard' },
+            menu: 'user'
+          }
+        ]
       }
     ]
   },
@@ -77,7 +92,7 @@ export const asyncRouterMap = [
         path: 'index',
         component: () => import('@/views/articleList/index.vue'),
         // name: 'Article',
-        meta: { title: '文章', icon: 'dashboard', affix: true },
+        meta: { title: '文章', icon: 'dashboard' },
         menu: 'article'
       }
     ]
@@ -93,7 +108,7 @@ export const asyncRouterMap = [
         path: 'index',
         component: () => import('@/views/About.vue'),
         // name: 'About',
-        meta: { title: '关于', icon: 'dashboard', affix: true },
+        meta: { title: '关于', icon: 'dashboard' },
         menu: 'about'
       }
     ]

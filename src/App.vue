@@ -5,6 +5,6 @@
 </template>
 
 <style lang="scss">
-// @import '~normalize.css/normalize.css';
-@import './styles/index.scss'; // 全
+@import '~normalize.css/normalize.css';
+// @import './styles/index.scss'; // 全
 </style>

@@ -1,14 +1,19 @@
 <template>
   <div v-if="!routes.hidden">
     <template
-      v-if="hasOneShowingChild(routes.children,routes) && (!onlyOneChild.children||onlyOneChild.noShowingChildren)"
+      v-if="
+        hasOneShowingChild(routes.children, routes) &&
+          (!onlyOneChild.children || onlyOneChild.noShowingChildren)
+      "
     >
       <router-link :to="resolvePath(onlyOneChild.path)">
-        <el-menu-item :index="resolvePath(onlyOneChild.path)">{{ onlyOneChild.meta.title }}</el-menu-item>
+        <el-menu-item :index="resolvePath(onlyOneChild.path)">{{
+          onlyOneChild.meta.title
+        }}</el-menu-item>
       </router-link>
     </template>
 
-    <el-submenu v-else popper-append-to-body :index="resolvePath(onlyOneChild.path)">
+    <el-submenu v-else ref="subMenu" popper-append-to-body :index="resolvePath(routes.path)">
       <template slot="title">
         <i class="el-icon-location" />
         <span slot="title">{{ routes.meta.title }}</span>
@@ -74,5 +79,4 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>

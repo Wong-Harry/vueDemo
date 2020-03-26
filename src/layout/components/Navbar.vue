@@ -1,26 +1,57 @@
 <template>
   <div class="navbar">
-    <Hamburger class="hamburger-container" />
+    <Hamburger
+      :is-active="sidebar.isOpen"
+      class="hamburger-container"
+      @toggleClick="toggleSideBar"
+    />
+
     <Breadcrumb class="breadcrumb-container" />
+
+    <div class="right-menu">
+      <el-dropdown>
+        <span class="el-dropdown-link">
+          下拉菜单
+          <i class="el-icon-arrow-down el-icon--right" />
+        </span>
+
+        <el-dropdown-menu slot="dropdown">
+          <router-link to="/">
+            <el-dropdown-item>回到主页</el-dropdown-item>
+          </router-link>
+          <el-dropdown-item>这是下拉菜单</el-dropdown-item>
+          <el-dropdown-item>这是下拉菜单</el-dropdown-item>
+          <el-dropdown-item divided>退出登陆</el-dropdown-item>
+        </el-dropdown-menu>
+      </el-dropdown>
+    </div>
   </div>
 </template>
 
 <script>
 import Breadcrumb from '@/components/Breadcrumb'
 import Hamburger from '@/components/Hamburger'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'Navbar',
   components: {
     Breadcrumb,
     Hamburger
+  },
+  computed: {
+    ...mapGetters(['sidebar'])
+  },
+  methods: {
+    toggleSideBar() {
+      this.$store.dispatch('toggleSideBar')
+    }
   }
 }
 </script>
 
 <style lang="scss" scoped>
 .navbar {
-  padding: 0 10px;
   height: 50px;
   overflow: hidden;
   position: relative;
@@ -41,11 +72,23 @@ export default {
   }
 
   .breadcrumb-container {
-    margin-left: 20px;
     float: left;
     height: 100%;
     display: flex;
     align-items: center;
+  }
+
+  .right-menu {
+    float: right;
+    height: 100%;
+    line-height: 50px;
+    .el-dropdown-link {
+      cursor: pointer;
+      color: #409eff;
+    }
+    .el-icon-arrow-down {
+      font-size: 12px;
+    }
   }
 }
 </style>

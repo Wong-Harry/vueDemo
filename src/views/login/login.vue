@@ -23,7 +23,6 @@
 </template>
 
 <script>
-
 export default {
   data() {
     return {
@@ -97,15 +96,14 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import '../../styles/mixin.scss';
 $bg: #2d3a4b;
-$dark_gray: #889aa4;
 $light_gray: #eee;
 
 .loginBox {
-  @include relative;
-  height: 100vh;
+  min-height: 100%;
+  width: 100%;
   background-color: $bg;
+  overflow: hidden;
   .formBox {
     margin: 120px auto;
     position: absolute;

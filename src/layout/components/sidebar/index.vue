@@ -12,7 +12,7 @@
       >
         <sidebar-item
           v-for="item in permission_routers"
-          :key="item.id"
+          :key="item.path"
           :routes="item"
           :base-path="item.path"
         />
